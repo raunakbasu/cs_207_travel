@@ -1,0 +1,19 @@
+{
+  "name": "cs_207_travel",
+  "version": "1.0.0",
+  "description": "Travel App for CS-207 at Ashoka University",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neerajp99/cs_207_travel.git"
+  },
+  "author": "neerajp99",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neerajp99/cs_207_travel/issues"
+  },
+  "homepage": "https://github.com/neerajp99/cs_207_travel#readme"
+}

@@ -3,13 +3,38 @@ import axios from "axios";
 
 class Landing extends Component {
   state = {
-    from: ""
+    from: "",
+    fromFinal: ""
   };
 
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
+    axios({
+      method: "GET",
+      url:
+        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/",
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host":
+          "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005"
+      },
+      params: {
+        query: this.state.from
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.setState({
+          fromFinal: response.data.Places[0].PlaceId
+        });
+        console.log(this.state);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
@@ -17,7 +42,7 @@ class Landing extends Component {
       <div className="landing">
         <div className="landing_first">Hello world</div>
         <div className="landing_search">
-          <div class="col-xs-12 ">
+          <div className="col-xs-12 ">
             <nav>
               <div
                 className="nav nav-tabs nav-fill"

@@ -2,6 +2,16 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class Landing extends Component {
+  state = {
+    from: ""
+  };
+
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
   render() {
     return (
       <div className="landing">
@@ -66,28 +76,28 @@ class Landing extends Component {
                     />
                   </li>
                   <li className="bullshit_one_1">
-                  <input
-                    className="form-control form-control-lg text-field"
-                    placeholder="To"
-                    name="to"
-                    onChange={this.onChange}
-                  />
+                    <input
+                      className="form-control form-control-lg text-field"
+                      placeholder="To"
+                      name="to"
+                      onChange={this.onChange}
+                    />
                   </li>
                   <li className="bullshit_one_1">
-                  <input
-                    className="form-control form-control-lg text-field"
-                    placeholder="From"
-                    name="from"
-                    onChange={this.onChange}
-                  />
+                    <input
+                      className="form-control form-control-lg text-field"
+                      placeholder="From"
+                      name="from"
+                      onChange={this.onChange}
+                    />
                   </li>
                   <li className="bullshit_one_1">
-                  <input
-                    className="form-control form-control-lg text-field"
-                    placeholder="From"
-                    name="from"
-                    onChange={this.onChange}
-                  />
+                    <input
+                      className="form-control form-control-lg text-field"
+                      placeholder="From"
+                      name="from"
+                      onChange={this.onChange}
+                    />
                   </li>
                 </ul>
               </div>

@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Calendar } from "react-date-range";
+import Moment from "react-moment";
+import { format, addDays } from "date-fns";
 
 class Landing extends Component {
   state = {
-    from: "",
-    fromFinal: ""
+    from: "Delhi",
+    fromFinal: "DEL-sky",
+    to: "",
+    finalTo: "",
+    fromDate: "",
+    toDate: ""
   };
 
-  onChange = event => {
+  onChangeFrom = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -36,6 +43,94 @@ class Landing extends Component {
         console.log(error);
       });
   };
+
+  onChangeTo = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+    axios({
+      method: "GET",
+      url:
+        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/",
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host":
+          "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005"
+      },
+      params: {
+        query: this.state.to
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.setState({
+          finalTo: response.data.Places[0].PlaceId
+        });
+        console.log(this.state);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  formatDateDisplay = (date, defaultText) => {
+    if (!date) return defaultText;
+    return format(date, "MM/dd/yyyy");
+  };
+
+  handleSelectFrom = date => {
+    console.log(date._d);
+    this.setState({
+      fromDate: this.formatDateDisplay(date._d)
+    });
+    console.log(this.state.fromDate);
+  };
+
+  handleSelectTo = date => {
+    console.log(date._d);
+    this.setState({
+      toDate: this.formatDateDisplay(date._d)
+    });
+    console.log(this.state.toDate);
+  };
+
+  // create a session and then poll session results
+
+  getFlights = () => {
+    axios({
+      method: "POST",
+      url:
+        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "x-rapidapi-host":
+          "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005"
+      },
+      data: {
+        inboundDate: this.state.fromDate,
+        cabinClass: "economy",
+        children: "0",
+        infants: "0",
+        country: "US",
+        currency: "USD",
+        locale: "en-US",
+        originPlace: this.state.fromFinal,
+        destinationPlace: this.state.finalTo,
+        outboundDate: this.state.toDate,
+        adults: "1"
+      }
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  componentDidMount() {
+    // some random shit gioes here
+  }
 
   render() {
     return (
@@ -95,9 +190,9 @@ class Landing extends Component {
                   <li className="bullshit_one_1">
                     <input
                       className="form-control form-control-lg text-field"
-                      placeholder="From"
+                      placeholder="Delhi"
                       name="from"
-                      onChange={this.onChange}
+                      onChange={this.onChangeFrom}
                     />
                   </li>
                   <li className="bullshit_one_1">
@@ -105,25 +200,22 @@ class Landing extends Component {
                       className="form-control form-control-lg text-field"
                       placeholder="To"
                       name="to"
-                      onChange={this.onChange}
+                      onChange={this.onChangeTo}
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <input
-                      className="form-control form-control-lg text-field"
-                      placeholder="From"
-                      name="from"
-                      onChange={this.onChange}
+                    <Calendar
+                      date={this.state.fromDate}
+                      onChange={this.handleSelectFrom}
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <input
-                      className="form-control form-control-lg text-field"
-                      placeholder="From"
-                      name="from"
-                      onChange={this.onChange}
+                    <Calendar
+                      date={this.state.fromDate}
+                      onChange={this.handleSelectTo}
                     />
                   </li>
+                  <button onClick={this.getFlights}>Submit</button>
                 </ul>
               </div>
               <div

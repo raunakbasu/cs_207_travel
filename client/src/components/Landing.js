@@ -12,7 +12,8 @@ class Landing extends Component {
     to: "San Francisco",
     finalTo: "SFO-sky",
     fromDate: "",
-    toDate: ""
+    toDate: "",
+    session: ""
   };
 
   onChangeFrom = event => {
@@ -98,6 +99,7 @@ class Landing extends Component {
   // create a session and then poll session results
 
   getFlights = () => {
+    let y;
     var req = unirest(
       "POST",
       "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
@@ -124,17 +126,43 @@ class Landing extends Component {
       adults: "1"
     });
 
-    req.end(function(res) {
+    req.end(res => {
       if (res.error) throw new Error(res.error);
       let x = res.headers.location;
-      let y = x.split("/");
-      console.log(y[y.length - 1]);
-      return y[y.length - 1];
+      y = x.split("/");
+      let z = y[y.length - 1];
+      console.log(z);
+      this.setState({
+        session: y[y.length - 1]
+      });
+      this.getFlightsFinal(z);
     });
   };
-  componentDidMount() {
-    // some random shit gioes here
-  }
+
+  getFlightsFinal = session => {
+    console.log("Z", session);
+    axios({
+      method: "GET",
+      url:
+        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/3ebea7ea-a3da-401d-af82-295eca60acae",
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host":
+          "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005"
+      },
+      params: {
+        pageIndex: "0",
+        pageSize: "10"
+      }
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
     return (

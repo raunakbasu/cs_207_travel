@@ -3,13 +3,14 @@ import axios from "axios";
 import { Calendar } from "react-date-range";
 import Moment from "react-moment";
 import { format, addDays } from "date-fns";
+import unirest from "unirest";
 
 class Landing extends Component {
   state = {
     from: "Delhi",
     fromFinal: "DEL-sky",
-    to: "",
-    finalTo: "",
+    to: "San Francisco",
+    finalTo: "SFO-sky",
     fromDate: "",
     toDate: ""
   };
@@ -75,7 +76,7 @@ class Landing extends Component {
   };
   formatDateDisplay = (date, defaultText) => {
     if (!date) return defaultText;
-    return format(date, "MM/dd/yyyy");
+    return format(date, "yyyy-MM-dd");
   };
 
   handleSelectFrom = date => {
@@ -97,36 +98,39 @@ class Landing extends Component {
   // create a session and then poll session results
 
   getFlights = () => {
-    axios({
-      method: "POST",
-      url:
-        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
-      headers: {
-        "content-type": "application/x-www-form-urlencoded",
-        "x-rapidapi-host":
-          "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-        "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005"
-      },
-      data: {
-        inboundDate: this.state.fromDate,
-        cabinClass: "economy",
-        children: "0",
-        infants: "0",
-        country: "US",
-        currency: "USD",
-        locale: "en-US",
-        originPlace: this.state.fromFinal,
-        destinationPlace: this.state.finalTo,
-        outboundDate: this.state.toDate,
-        adults: "1"
-      }
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    var req = unirest(
+      "POST",
+      "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
+    );
+
+    req.headers({
+      "x-rapidapi-host":
+        "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+      "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005",
+      "content-type": "application/x-www-form-urlencoded"
+    });
+
+    req.form({
+      inboundDate: this.state.toDate,
+      cabinClass: "economy",
+      children: "0",
+      infants: "0",
+      country: "US",
+      currency: "USD",
+      locale: "en-US",
+      originPlace: this.state.fromFinal,
+      destinationPlace: this.state.finalTo,
+      outboundDate: this.state.fromDate,
+      adults: "1"
+    });
+
+    req.end(function(res) {
+      if (res.error) throw new Error(res.error);
+      let x = res.headers.location;
+      let y = x.split("/");
+      console.log(y[y.length - 1]);
+      return y[y.length - 1];
+    });
   };
   componentDidMount() {
     // some random shit gioes here

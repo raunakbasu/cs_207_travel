@@ -206,6 +206,39 @@ class Landing extends Component {
       });
   };
 
+  // Get hotels lists
+  getHotelsList = () => {
+    axios({
+      method: "GET",
+      url: "https://apidojo-booking-v1.p.rapidapi.com/properties/list",
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host": "apidojo-booking-v1.p.rapidapi.com",
+        "x-rapidapi-key": "FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
+      },
+      params: {
+        price_filter_currencycode: "USD",
+        travel_purpose: "leisure",
+        search_id: "none",
+        order_by: "popularity",
+        languagecode: "en-us",
+        search_type: "city",
+        offset: "0",
+        dest_ids: "-2167973",
+        guest_qty: "1",
+        arrival_date: "2019-12-13",
+        departure_date: "2019-12-17",
+        room_qty: "1"
+      }
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   render() {
     return (
       <div className="landing">
@@ -323,6 +356,8 @@ class Landing extends Component {
                       onChange={this.onChangeLocation}
                     />
                   </li>
+
+                  <button onClick={this.getHotelsList}>Find Hotels</button>
                 </ul>
               </div>
             </div>

@@ -47,7 +47,7 @@ require("./config/passport")(passport);
 app.use("/api/user", users);
 
 // add listening port
-const port = process.env.PORT || 5003;
+const port = process.env.PORT || 5009;
 
 app.listen(port, () => {
   console.log(`app listening at port ${port}`);

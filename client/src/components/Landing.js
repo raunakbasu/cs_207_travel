@@ -143,8 +143,7 @@ class Landing extends Component {
     console.log("Z", session);
     axios({
       method: "GET",
-      url:
-        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/3ebea7ea-a3da-401d-af82-295eca60acae",
+      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/${session}?sortType=duration&sortOrder=asc&pageIndex=0&pageSize=10`,
       headers: {
         "content-type": "application/octet-stream",
         "x-rapidapi-host":

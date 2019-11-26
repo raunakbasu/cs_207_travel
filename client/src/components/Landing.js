@@ -13,8 +13,16 @@ class Landing extends Component {
     finalTo: "SFO-sky",
     fromDate: "",
     toDate: "",
-    session: ""
+    session: "",
+    location: "",
+    finalLocation: ""
   };
+
+  //###########################################################
+  //###########################################################
+  // Flights Requets and code goes here
+  //###########################################################
+  //###########################################################
 
   onChangeFrom = event => {
     this.setState({
@@ -163,6 +171,41 @@ class Landing extends Component {
       });
   };
 
+  //###########################################################
+  //###########################################################
+  // Hotels Requets and code goes here
+  //###########################################################
+  // ###########################################################
+
+  onChangeLocation = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+    // console.log(this.state.location)
+    axios({
+      method: "GET",
+      url: "https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete",
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host": "apidojo-booking-v1.p.rapidapi.com",
+        "x-rapidapi-key": "FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
+      },
+      params: {
+        languagecode: "en-us",
+        text: this.state.location
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.setState({
+          finalLocation: response.data[0].dest_id
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   render() {
     return (
       <div className="landing">
@@ -271,31 +314,16 @@ class Landing extends Component {
                 role="tabpanel"
                 aria-labelledby="nav-contact-tab"
               >
-                Et et consectetur ipsum labore excepteur est proident excepteur
-                ad velit occaecat qui minim occaecat veniam. Fugiat veniam
-                incididunt anim aliqua enim pariatur veniam sunt est aute sit
-                dolor anim. Velit non irure adipisicing aliqua ullamco irure
-                incididunt irure non esse consectetur nostrud minim non minim
-                occaecat. Amet duis do nisi duis veniam non est eiusmod tempor
-                incididunt tempor dolor ipsum in qui sit. Exercitation mollit
-                sit culpa nisi culpa non adipisicing reprehenderit do dolore.
-                Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-              </div>
-              <div
-                className="tab-pane fade"
-                id="nav-about"
-                role="tabpanel"
-                aria-labelledby="nav-about-tab"
-              >
-                Et et consectetur ipsum labore excepteur est proident excepteur
-                ad velit occaecat qui minim occaecat veniam. Fugiat veniam
-                incididunt anim aliqua enim pariatur veniam sunt est aute sit
-                dolor anim. Velit non irure adipisicing aliqua ullamco irure
-                incididunt irure non esse consectetur nostrud minim non minim
-                occaecat. Amet duis do nisi duis veniam non est eiusmod tempor
-                incididunt tempor dolor ipsum in qui sit. Exercitation mollit
-                sit culpa nisi culpa non adipisicing reprehenderit do dolore.
-                Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                <ul className="">
+                  <li className="">
+                    <input
+                      className="form-control form-control-lg text-field"
+                      placeholder="Location"
+                      name="location"
+                      onChange={this.onChangeLocation}
+                    />
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

@@ -15,7 +15,9 @@ class Landing extends Component {
     toDate: "",
     session: "",
     location: "",
-    finalLocation: ""
+    finalLocation: "",
+    fromHotelDate: "",
+    toHotelDate: ""
   };
 
   //###########################################################
@@ -224,10 +226,10 @@ class Landing extends Component {
         languagecode: "en-us",
         search_type: "city",
         offset: "0",
-        dest_ids: "-2167973",
+        dest_ids: this.state.finalLocation,
         guest_qty: "1",
-        arrival_date: "2019-12-13",
-        departure_date: "2019-12-17",
+        arrival_date: this.state.fromHotelDate,
+        departure_date: this.state.toHotelDate,
         room_qty: "1"
       }
     })
@@ -237,6 +239,22 @@ class Landing extends Component {
       .catch(error => {
         console.log(error);
       });
+  };
+
+  handleSelectFromHotel = date => {
+    console.log(date._d);
+    this.setState({
+      fromHotelDate: this.formatDateDisplay(date._d)
+    });
+    console.log(this.state.fromHotelDate);
+  };
+
+  handleSelectToHotel = date => {
+    console.log(date._d);
+    this.setState({
+      toHotelDate: this.formatDateDisplay(date._d)
+    });
+    console.log(this.state.toHotelDate);
   };
 
   render() {
@@ -252,7 +270,7 @@ class Landing extends Component {
                 role="tablist"
               >
                 <a
-                  className="nav-item nav-link active"
+                  className="nav-item nav-link active nav_item_text"
                   id="nav-home-tab"
                   data-toggle="tab"
                   href="#nav-home"
@@ -262,19 +280,9 @@ class Landing extends Component {
                 >
                   Flights
                 </a>
+
                 <a
-                  className="nav-item nav-link"
-                  id="nav-profile-tab"
-                  data-toggle="tab"
-                  href="#nav-profile"
-                  role="tab"
-                  aria-controls="nav-profile"
-                  aria-selected="false"
-                >
-                  Trains
-                </a>
-                <a
-                  className="nav-item nav-link"
+                  className="nav-item nav-link nav_item_text"
                   id="nav-contact-tab"
                   data-toggle="tab"
                   href="#nav-contact"
@@ -296,51 +304,57 @@ class Landing extends Component {
                 <ul className="bullshit_one">
                   <li className="bullshit_one_1">
                     <input
-                      className="form-control form-control-lg text-field"
-                      placeholder="Delhi"
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="From"
                       name="from"
                       onChange={this.onChangeFrom}
                     />
                   </li>
                   <li className="bullshit_one_1">
                     <input
-                      className="form-control form-control-lg text-field"
-                      placeholder="To"
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Where"
                       name="to"
                       onChange={this.onChangeTo}
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <Calendar
+                    <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Check-in date"
+                      name="from"
+                    />
+                    {/* <Calendar
                       date={this.state.fromDate}
                       onChange={this.handleSelectFrom}
+
                     />
+                    */}
                   </li>
                   <li className="bullshit_one_1">
-                    <Calendar
-                      date={this.state.fromDate}
-                      onChange={this.handleSelectTo}
+                    <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Check-out date"
+                      name="from"
                     />
+                    {/*<Calendar
+                      date={this.state.toDate}
+                      onChange={this.handleSelectTo}
+                    />*/}
                   </li>
-                  <button onClick={this.getFlights}>Submit</button>
+                  <li className="bullshit_one_1">
+                    <input
+                      type="submit"
+                      className="form-control form-control-lg text_field text-field submit_button"
+                      value="Find Flights"
+                      onClick={this.getFlights}
+
+                    />
+
+                  </li>
                 </ul>
               </div>
-              <div
-                className="tab-pane fade"
-                id="nav-profile"
-                role="tabpanel"
-                aria-labelledby="nav-profile-tab"
-              >
-                Et et consectetur ipsum labore excepteur est proident excepteur
-                ad velit occaecat qui minim occaecat veniam. Fugiat veniam
-                incididunt anim aliqua enim pariatur veniam sunt est aute sit
-                dolor anim. Velit non irure adipisicing aliqua ullamco irure
-                incididunt irure non esse consectetur nostrud minim non minim
-                occaecat. Amet duis do nisi duis veniam non est eiusmod tempor
-                incididunt tempor dolor ipsum in qui sit. Exercitation mollit
-                sit culpa nisi culpa non adipisicing reprehenderit do dolore.
-                Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-              </div>
+
               <div
                 className="tab-pane fade"
                 id="nav-contact"
@@ -354,6 +368,18 @@ class Landing extends Component {
                       placeholder="Location"
                       name="location"
                       onChange={this.onChangeLocation}
+                    />
+                  </li>
+                  <li className="bullshit_one_1">
+                    <Calendar
+                      date={this.state.fromHotelDate}
+                      onChange={this.handleSelectFromHotel}
+                    />
+                  </li>
+                  <li className="bullshit_one_1">
+                    <Calendar
+                      date={this.state.toHotelDate}
+                      onChange={this.handleSelectToHotel}
                     />
                   </li>
 

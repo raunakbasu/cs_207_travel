@@ -25,7 +25,7 @@
 
 .standard_navbar {
   height: 80px;
-  background: #1c212a;
+  background: #2e3f61;
   color: #fff;
 }
 .standard_form {
@@ -79,4 +79,85 @@ select:focus,
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
+}
+
+/* Landing Page CSS goes here */
+.landing_first {
+  height: 91vh;
+  width: 100vw;
+  background-image: url("./utils/img/backgound.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.landing_search {
+  height: 25vh;
+  width: 80vw;
+  background: #2e3f61;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  margin-top: -10%;
+}
+#nav-contact-tab {
+  border-radius: 0px !important;
+  height: 6vh !important;
+  border: none !important;
+  border-bottom: 2px solid #2e3f61 !important;
+  background: #fff;
+}
+#nav-home-tab {
+  border-radius: 0px !important;
+  height: 6vh !important;
+  border: none !important;
+  border-bottom: 2px solid #2e3f61 !important;
+  background: #fff;
+}
+.nav_item_text {
+  font-family: "Nunito", sans-serif !important;
+  font-size: 25px !important;
+  text-align: center !important;
+  /* line-height: 3rem !important; */
+  color: #2e3f61;
+  outline: none !important;
+  text-decoration: none !important;
+  /* pointer-events: none; */
+}
+.nav_item_text:hover {
+  color: #2e3f61 !important;
+}
+.nav-link.active {
+  color: #fff !important;
+  background: #2e3f61 !important;
+}
+.bullshit_one {
+  position: relative;
+  margin-top: 2.5% !important;
+}
+.bullshit_one_1 {
+  list-style: none !important;
+  width: 15vw;
+  display: inline-block;
+  font-family: "Nunito", sans-serif !important;
+}
+.text_field {
+  height: 8vh !important;
+  border: 0px !important;
+  /* border-bottom: 0px !important;
+   border-top: 0px !important; */
+  border-radius: 0px !important;
+}
+.submit_button {
+  height: 8.05vh !important;
+  width: 15vw;
+  margin-top: -0.05px !important;
+  background-color: #637496 !important;
+  color: #fff !important;
+  text-transform: uppercase;
+  font-weight: 600 !important;;
+}
+/* .submit_button:hover {
+   cursor:not-allowed !important;
+} */
+.text_field:nth-child(1) {
+  border-left: 1.5px solid #2e3f61 !important;
 }

@@ -4,6 +4,7 @@ import { Calendar } from "react-date-range";
 import Moment from "react-moment";
 import { format, addDays } from "date-fns";
 import unirest from "unirest";
+import About from './About'
 
 class Landing extends Component {
   state = {
@@ -260,7 +261,7 @@ class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <div className="landing_first">Hello world</div>
+        <div className="landing_first"></div>
         <div className="landing_search">
           <div className="col-xs-12 ">
             <nav>
@@ -318,11 +319,12 @@ class Landing extends Component {
                       onChange={this.onChangeTo}
                     />
                   </li>
+
                   <li className="bullshit_one_1">
                     <input
                       className="form-control form-control-lg text-field text_field"
-                      placeholder="Check-in date"
-                      name="from"
+                      placeholder="Depart"
+                      name="depart"
                     />
                     {/* <Calendar
                       date={this.state.fromDate}
@@ -334,8 +336,8 @@ class Landing extends Component {
                   <li className="bullshit_one_1">
                     <input
                       className="form-control form-control-lg text-field text_field"
-                      placeholder="Check-out date"
-                      name="from"
+                      placeholder="Return"
+                      name="return"
                     />
                     {/*<Calendar
                       date={this.state.toDate}
@@ -344,13 +346,18 @@ class Landing extends Component {
                   </li>
                   <li className="bullshit_one_1">
                     <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Class & Travellers"
+                      name="cabin"
+                    />
+                  </li>
+                  <li className="bullshit_one_1">
+                    <input
                       type="submit"
                       className="form-control form-control-lg text_field text-field submit_button"
                       value="Find Flights"
                       onClick={this.getFlights}
-
                     />
-
                   </li>
                 </ul>
               </div>
@@ -361,34 +368,65 @@ class Landing extends Component {
                 role="tabpanel"
                 aria-labelledby="nav-contact-tab"
               >
-                <ul className="">
-                  <li className="">
+                <ul className="bullshit_one">
+                  <li className="bullshit_one_1">
                     <input
-                      className="form-control form-control-lg text-field"
+                      className="form-control form-control-lg  text_field"
                       placeholder="Location"
                       name="location"
                       onChange={this.onChangeLocation}
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <Calendar
+                    <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Check-in date"
+                      name="from"
+                    />
+                    {/*<Calendar
                       date={this.state.fromHotelDate}
                       onChange={this.handleSelectFromHotel}
+                    />*/}
+                  </li>
+                  <li className="bullshit_one_1">
+                    <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Check-out date"
+                      name="from"
+                    />
+                    {/*  <Calendar
+                      date={this.state.toHotelDate}
+                      onChange={this.handleSelectToHotel}
+                    />*/}
+                  </li>
+                  <li className="bullshit_one_1">
+                    <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Class & Travellers"
+                      name="cabin"
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <Calendar
-                      date={this.state.toHotelDate}
-                      onChange={this.handleSelectToHotel}
+                    <input
+                      className="form-control form-control-lg text-field text_field"
+                      placeholder="Purpose"
+                      name="purpose"
                     />
                   </li>
-
-                  <button onClick={this.getHotelsList}>Find Hotels</button>
+                  <li className="bullshit_one_1">
+                    <input
+                      type="submit"
+                      className="form-control form-control-lg text_field text-field submit_button"
+                      value="Find Hotels"
+                      onClick={this.getHotelsList}
+                    />
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
+        <About />
       </div>
     );
   }

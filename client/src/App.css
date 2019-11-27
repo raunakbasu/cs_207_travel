@@ -88,6 +88,8 @@ select:focus,
   background-image: url("./utils/img/backgound.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
+  -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(80%);
 }
 .landing_search {
   height: 25vh;
@@ -135,29 +137,93 @@ select:focus,
 }
 .bullshit_one_1 {
   list-style: none !important;
-  width: 15vw;
+  width: 12vw;
   display: inline-block;
   font-family: "Nunito", sans-serif !important;
 }
 .text_field {
-  height: 8vh !important;
+  height: 7vh !important;
   border: 0px !important;
   /* border-bottom: 0px !important;
    border-top: 0px !important; */
   border-radius: 0px !important;
 }
 .submit_button {
-  height: 8.05vh !important;
-  width: 15vw;
+  height: 7.05vh !important;
+  width: 12vw;
   margin-top: -0.05px !important;
   background-color: #637496 !important;
   color: #fff !important;
   text-transform: uppercase;
-  font-weight: 600 !important;;
+  font-weight: 600 !important;
+  font-size: 20px !important;
 }
 /* .submit_button:hover {
    cursor:not-allowed !important;
 } */
 .text_field:nth-child(1) {
   border-left: 1.5px solid #2e3f61 !important;
+}
+/* About Page CSS goes here */
+.about {
+  height: 115vh !important;
+  width: 100vw;
+  background: #fff !important;
+}
+
+.about-left {
+}
+.about-right {
+}
+
+.about_text {
+  margin-top: 15%;
+}
+.about_text_heading {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  font-size: 50px;
+  text-align: left;
+  line-height: 1.2em;
+}
+.about_text_p {
+  text-align: left;
+  font-family: "Nunito", sans-serif !important;
+  margin-top: 5%;
+}
+.about_right_images_1 {
+  margin-left: -25%;
+  margin-top: -5%;
+}
+.about_right_images_1 > div {
+  display: inline-block;
+  margin-left: 5%;
+  margin-top: 10%;
+}
+.about_link_image1 {
+  position: absolute;
+  height: 40vh;
+  z-index: 2;
+  top: 25%;
+  right: 15%;
+  border: 20px solid #fff;
+}
+.about_link_image2 {
+  position: absolute;
+  height: 70vh;
+  right: 35% !important;
+  z-index: 1;
+  top: 20%;
+}
+.about_link_image3 {
+  position: absolute;
+  height: 30vh;
+  top: 70%;
+  z-index: 2;
+  right: 65%;
+  border: 20px solid #fff;
+}
+.about_link_images {
+  margin-top: 20%;
+  margin-right: 20% !important;
 }

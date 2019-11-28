@@ -227,3 +227,120 @@ select:focus,
   margin-top: 20%;
   margin-right: 20% !important;
 }
+.zoom_div img {
+  transition: 0.3s all ease-in-out;
+  border-radius: 0px !important;
+}
+.zoom_div:hover img {
+  transform: scale(1.1);
+  transition: 0.3s all ease-in-out;
+}
+
+/* BlogPosts and News css goes here */
+.blog {
+  height: 90vh;
+  width: 100vw;
+  margin-top: 5%;
+  background-color: #f8faff;
+  padding-top: 5%;
+}
+.blog_heading {
+  font-family: "Playfair Display", serif;
+  font-size: 50px;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 600;
+  color: #2e3f61;
+}
+.blog_card {
+  display: inline-block !important;
+  margin-left: 5%;
+  background: transparent !important;
+  border: none !important;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+.containe {
+  margin-top: 5% !important;
+  margin-left: -5%;
+}
+.blog_subhead {
+  font-family: "Baskervville", serif;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: -4%;
+  color: #42524e;
+  margin-top: 5% !important;
+}
+.pp {
+  padding-top: 4% !important;
+  font-size: 16px;
+  text-align: left;
+  font-family: "Nunito", serif;
+  margin-left: -4%;
+}
+.blog_span {
+  background: #2e3f61;
+  padding: 6px 80px 6px;
+  position: absolute;
+  margin-top: -10% !important;
+  left: 8%;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.blog_card:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+.blog_card > img {
+  transition: transform 0.3s ease-in-out;
+}
+.main_btn {
+  padding: 5px 40px;
+  background: 0 0;
+  z-index: 222;
+  display: inline-block;
+  text-align: center;
+  color: #222;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 48px;
+  border: 1px solid #2e3f61;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  text-decoration: !important none;
+  left: 31%;
+  margin-top: 2%;
+}
+.main_btn > img {
+  position: absolute;
+  top: 40%;
+  right: -30px;
+
+  /* -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%); */
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.main_btn:hover{
+  background-color: #2e3f61;
+  color: #fff;
+  text-decoration: none;
+}
+.main_btn:hover img{
+  transform: translateX(20%)
+}

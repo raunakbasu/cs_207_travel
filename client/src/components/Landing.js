@@ -405,7 +405,7 @@ class Landing extends Component {
                   <li className="bullshit_one_1">
                     <input
                       className="form-control form-control-lg text-field text_field"
-                      placeholder="Class & Travellers"
+                      placeholder="Travellers"
                       name="cabin"
                     />
                   </li>

@@ -5,8 +5,8 @@ class FlightList extends Component {
   render() {
     return (
       <div className="flightlist">
-        <div className="col-md-2 flightlist_left" />
-        <div className="col-md-10 flightlist_right">
+        <div className="col-md-3 flightlist_left" />
+        <div className="col-md-9 flightlist_right">
           <div className="flightlist_search">lalalalaal</div>
           <br />
           <h2 className="flight_result">RESULT (24)</h2>

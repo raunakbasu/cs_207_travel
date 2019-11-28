@@ -241,7 +241,7 @@ select:focus,
   height: 90vh;
   width: 100vw;
   margin-top: 5%;
-  background-color: #f8faff;
+  background-color: #fff;
   padding-top: 5%;
 }
 .blog_heading {
@@ -336,11 +336,87 @@ select:focus,
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
-.main_btn:hover{
+.main_btn:hover {
   background-color: #2e3f61;
   color: #fff;
   text-decoration: none;
 }
-.main_btn:hover img{
-  transform: translateX(20%)
+.main_btn:hover img {
+  transform: translateX(20%);
+}
+
+/* Newsletter CSS goes here */
+
+.newsletter {
+  height: 100vh;
+  width: 100vw;
+  background: #fff;
+}
+.beach {
+  height: 60vh;
+  margin-top: 3%;
+  margin-left: 20%;
+  /* width: 70vw; */
+  -webkit-filter: grayscale(40%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(40%);
+}
+.newsletter_box {
+  background: #50b6c1;
+  height: 55vh;
+  width: 60vw;
+  position: absolute;
+  margin-top: -10%;
+  margin-left: 8%;
+  border: 25px solid #fff;
+}
+.newsletter_heading {
+  color: #fff;
+  font-family: "Playfair Display", serif;
+  margin-top: 7%;
+  font-weight: 600;
+  font-size: 45px;
+}
+.newsletter_box > p {
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  color: #fff;
+  font-family: "Nunito", serif;
+  font-size: 20px;
+  margin-top: 3%;
+}
+.subscribe_buttons {
+  margin-top: 2%;
+  height: 50px !important;
+  margin-left: -1%;
+  width: 101% !important;
+}
+.ola {
+  display: flex;
+  margin-top: 7%;
+}
+.text_field_subscribe {
+  width: 30vw !important;
+  border: none !important;
+  border-radius: 0px !important;
+  display: inline-block;
+  margin-left: 7%;
+  font-family: "Nunito", serif;
+  height: 7vh !important;
+}
+.text_field_subscribe_button {
+  display: inline-block;
+  width: 15vw !important;
+  /* border: none !important; */
+  border-radius: 0px !important;
+  margin-left: 3%;
+  font-family: "Nunito", serif;
+  border: 4px solid #2e8690 !important;
+  color: #2e8690 !important;
+  height: 7vh !important;
+  transition: transform 0.3s ease-in-out;
+}
+.text_field_subscribe_button:hover{
+  transform: scale(0.97);
+  transition: transform 0.3s ease-in-out;
 }

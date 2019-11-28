@@ -729,3 +729,281 @@ h6 {
   right: -1vw;
   box-shadow: 0px 47px 0 0 #f5f7fb;
 }
+
+/* Hotel Details Css goes here */
+
+.hotellist {
+  background: #f5f7fb;
+  height: auto;
+  min-height: 100vh;
+  width: 100vw;
+  padding-top: 1.2%;
+  position: absolute;
+  overflow-x: hidden;
+}
+.hotels_top {
+  /* position: relative; */
+  height: 10vh;
+  width: 95vw;
+  text-align: center;
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    rgba(54, 123, 255, 1) 0%,
+    rgba(40, 189, 248, 1) 100%
+  );
+  position: fixed !important;
+  /* margin-top: 2% !important; */
+  border-radius: 20px;
+  margin-left: 2%;
+  z-index: 2;
+  /* margin-top: 2%; */
+}
+.hotels_top_search {
+  position: absolute;
+  height: 9vh;
+  background: #fff;
+  width: 80vw;
+  margin: 0 auto;
+  margin-left: 8vw;
+  margin-top: 3%;
+  border-radius: 20px;
+  box-shadow: 0 15px 25px -12px rgba(40, 189, 248, 0.4);
+}
+.hotels_top_search_list {
+  margin-left: -6%;
+}
+.hotels_top_search_list_item {
+  list-style: none;
+  display: inline-block;
+  margin-left: 3%;
+  font-size: 18px;
+  border-left: 2px solid #edf2f7;
+  height: 9vh;
+}
+.hotels_top_search_list_item > input {
+  height: 5vh !important;
+  border: 0px !important;
+  /* border: 2px solid #000 !important; */
+  width: 11vw;
+  margin: 0 auto !important;
+  margin-top: 8% !important;
+  font-family: "Nunito", serif;
+  color: #717375;
+  /* margin-left: 0% !important; */
+}
+.hotels_top_search_list_item:nth-child(1) {
+  border-left: none !important;
+  /* background: #000 !important */
+}
+.hotels_top_search_list_item:nth-child(5) {
+  border-left: none !important;
+}
+.hotels_top_search_list_item > i {
+  padding-right: 10px;
+  padding-left: 10px;
+  color: rgba(54, 123, 255, 1);
+}
+.hotels_top_search_list_item:nth-child(5) > input {
+  background: rgba(54, 123, 255, 1) !important;
+  height: 6.5vh !important;
+  margin-top: -1% !important;
+  margin-left: 1vw !important;
+  border-radius: 15px;
+  color: #fff;
+  font-family: "Nunito", serif;
+  font-weight: 600;
+  transition: 0.1s all ease-in-out;
+}
+.hotels_top_search_list_item:nth-child(5) > input:hover {
+  transform: scale(0.98);
+  transition: 0.1s all ease-in-out;
+}
+.hotel_result {
+  font-family: "Nunito", serif;
+  font-size: 22px;
+  text-align: left;
+  margin-left: 1%;
+}
+.hotellist_left {
+  float: left;
+  position: fixed !important;
+  margin-top: 5%;
+  height: 75vh;
+  background: #fff;
+  border-radius: 40px;
+  margin-left: 2%;
+  margin-top: 10%;
+  /* border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px; */
+}
+.hotellist_right {
+  position: relative;
+  right: 0;
+  float: right;
+  /* background: blue; */
+  height: auto;
+  margin-top: 10%;
+  min-height: 80vh;
+  left: 4% !important;
+  right: 4% !important;
+  z-index: 1;
+  padding-bottom: 30px;
+}
+.hotellist_right_list {
+}
+.hotellist_right_list_item {
+  display: block;
+  list-style: none;
+}
+.hotel_card {
+  border-radius: 0px !important;
+}
+
+.hotel_card_body {
+  border: none !important;
+}
+.hotel_card_body > p {
+  text-align: left;
+  width: 25vw;
+  font-family: "Nunito", serif;
+}
+.hotel_card_body > h5 {
+  text-align: left;
+  width: 25vw;
+  font-size: 25px;
+  font-family: "Nunito", serif;
+  margin-top: 2%;
+}
+.hotel_card_body > span {
+  background: #eef2f5;
+  padding: 6px 40px 6px;
+  border-radius: 5px;
+  position: relative;
+  margin-left: -33.5vw;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Nunito", serif;
+}
+.hotel_price {
+  background: transparent !important;
+  font-family: "Nunito", serif;
+  font-size: 40px !important;
+  position: relative !important;
+  float: right;
+  color: #808094;
+}
+.dollar {
+  font-size: 20px !important;
+  /* color: #000 !important; */
+  padding-right: 2px;
+}
+.green_quote {
+  color: rgb(18, 165, 131) !important;
+  font-size: 15px !important;
+  margin-top: -2% !important;
+  background: transparent !important;
+  font-family: "Nunito", serif;
+  /* font-size: 40px !important; */
+  position: relative !important;
+  float: right;
+  margin-top: 7% !important;
+}
+.book_hotel_button {
+  height: 5vh;
+  width: 12vw;
+  background: rgba(54, 123, 255, 1) !important;
+  position: relative !important;
+  float: right;
+  margin-top: 22% !important;
+  line-height: 2rem;
+  font-size: 17px !important;
+  color: #fff;
+  text-transform: uppercase;
+  transition: 0.1s all ease-in-out;
+}
+.star_reviews {
+  color: rgba(54, 123, 255, 1);
+  padding-right: 4px;
+}
+.book_hotel_button:hover {
+  transform: scale(0.98);
+  transition: 0.1s all ease-in-out;
+}
+.hotellist_left_list_item {
+  list-style: none;
+}
+.hotellist_left_list {
+}
+.hotellist_left_list_item > input {
+  font-size: 18px;
+  font-family: "Nunito", serif;
+  border: none !important;
+  border-bottom: 2px solid rgba(54, 123, 255, 1) !important;
+  width: 17vw;
+  margin-top: 7vh;
+  margin-left: -3vw;
+  color: #808094;
+}
+.hotellist_left_list_item > i {
+  color: rgba(54, 123, 255, 1);
+  font-size: 20px;
+  /* margin-left: -2vw; */
+}
+
+.hotellist_left_subheading {
+  margin-top: 7vh;
+  font-family: "Nunito", serif;
+  font-size: 20px !important;
+  font-weight: 600;
+  text-align: left;
+}
+.frequent {
+  margin-left: -3vw;
+  margin-top: -8%;
+}
+.frequent > span {
+  /* background: tomato; */
+  margin-left: 1vw;
+  padding: 0.8vh 1.5vw 0.8vh;
+  position: relative !important;
+
+  margin-top: 6% !important;
+  line-height: 2em;
+  display: inline-block;
+  border: 2px solid #808094;
+  font-family: "Nunito", serif;
+}
+.frequent > span:nth-child(1) {
+  background: rgba(54, 123, 255, 1) !important;
+  border: 2px solid rgba(54, 123, 255, 1) !important;
+  color: #fff;
+}
+.light {
+  font-weight: 600;
+  font-size: 20px !important;
+  /* background: tomato; */
+  padding: 0.8vh 1vw 0.8vh;
+  /* border-bottom: 2px solid #808094; */
+  color: #808094;
+}
+.recom > span > span {
+  color: rgba(54, 123, 255, 1);
+}
+.recom {
+  font-family: "Nunito", serif;
+  margin-top: 8vh;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: left;
+  color: #000;
+}
+.more_button {
+  margin-left: -6vw !important;
+  margin-top: 4vh !important;
+  color: rgba(54, 123, 255, 1);
+  border: 2px solid rgba(54, 123, 255, 1) !important;
+}
+.more_button:hover {
+  background-color: rgba(54, 123, 255, 1) !important;
+}

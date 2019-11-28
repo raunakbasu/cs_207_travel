@@ -38,7 +38,7 @@ class About extends Component {
                 <br />
                 <div className="about_right_images_1">
                   <div
-                    className="card"
+                    className="card zoom_div"
                     style={{
                       width: "12vw"
                     }}
@@ -46,7 +46,7 @@ class About extends Component {
                     <img src={otawa} className="card-img-top" alt="..." />
                   </div>
                   <div
-                    className="card"
+                    className="card zoom_div"
                     style={{
                       width: "12vw"
                     }}
@@ -56,15 +56,15 @@ class About extends Component {
                 </div>
                 <div className="about_right_images_1">
                   <div
-                    className="card"
+                    className="card zoom_div"
                     style={{
-                      width: "12vw"
+                      width: "12vw "
                     }}
                   >
                     <img src={perth} className="card-img-top" alt="..." />
                   </div>
                   <div
-                    className="card"
+                    className="card zoom_div"
                     style={{
                       width: "12vw"
                     }}

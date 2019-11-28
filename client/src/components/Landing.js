@@ -7,6 +7,7 @@ import unirest from "unirest";
 import About from "./About";
 import BlogPost from "./BlogPost";
 import Newsletter from "./Newsletter";
+import Footer from "./Footer";
 
 class Landing extends Component {
   state = {
@@ -431,6 +432,7 @@ class Landing extends Component {
         <About />
         <BlogPost />
         <Newsletter />
+        <Footer />
       </div>
     );
   }

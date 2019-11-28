@@ -4,8 +4,9 @@ import { Calendar } from "react-date-range";
 import Moment from "react-moment";
 import { format, addDays } from "date-fns";
 import unirest from "unirest";
-import About from './About'
-import BlogPost from './BlogPost'
+import About from "./About";
+import BlogPost from "./BlogPost";
+import Newsletter from "./Newsletter";
 
 class Landing extends Component {
   state = {
@@ -262,7 +263,7 @@ class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <div className="landing_first"></div>
+        <div className="landing_first" />
         <div className="landing_search">
           <div className="col-xs-12 ">
             <nav>
@@ -429,6 +430,7 @@ class Landing extends Component {
         </div>
         <About />
         <BlogPost />
+        <Newsletter />
       </div>
     );
   }

@@ -5,6 +5,7 @@ import Moment from "react-moment";
 import { format, addDays } from "date-fns";
 import unirest from "unirest";
 import About from './About'
+import BlogPost from './BlogPost'
 
 class Landing extends Component {
   state = {
@@ -427,6 +428,7 @@ class Landing extends Component {
           </div>
         </div>
         <About />
+        <BlogPost />
       </div>
     );
   }

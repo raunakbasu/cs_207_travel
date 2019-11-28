@@ -425,7 +425,7 @@ select:focus,
 
 .new_footer_area {
   margin-top: 10%;
-  background: #0a101b;
+  background: #fff;
 }
 
 .new_footer_top {
@@ -629,4 +629,103 @@ h6 {
   100% {
     left: 100%;
   }
+}
+
+/* Flight List Page css goes here */
+.flightlist {
+  background: #f5f7fb;
+  height: auto;
+  min-height: 100vh;
+  width: 100vw;
+}
+.flightlist_left {
+  float: left;
+  position: fixed !important;
+  height: 100vh;
+  background: rgb(76, 86, 191);
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+.flightlist_right {
+  position: relative;
+  right: 0;
+  float: right;
+  /* background: */
+  height: auto;
+  min-height: 100vh;
+}
+.flightlist_search {
+  background: #ffffff;
+  height: 25vh;
+  width: 72vw;
+  margin: 0 auto;
+  margin-top: 3% !important;
+  border-radius: 30px;
+}
+.map {
+  position: absolute;
+  bottom: 5%;
+  left: 2%;
+}
+.flight_result {
+  font-size: 25px;
+  text-align: left;
+  margin-left: 5%;
+  margin-top: 3%;
+  font-family: "Nunito", serif;
+}
+.flight_details_content {
+  /* position: absolute; */
+  height: 30vh;
+  margin-top: 3%;
+  /* width: 100vw; */
+  /* background: #fff; */
+  /* border: 2px solid #a9eef2; */
+  margin-left: 7%;
+  margin-right: 7%;
+  /* border-radius: 25px; */
+}
+.flight_details_content_left {
+  position: absolute !important;
+  left: 0;
+  background: #fff;
+  height: 30vh;
+  margin-left: 7%;
+  border-radius: 25px;
+}
+.flight_details_content_right {
+  position: absolute !important;
+  right: 0;
+  /* background: red; */
+  height: 30vh;
+  /* margin-right: 7%; */
+  border-left: 2px dashed #c7cdd0d9;
+  margin-bottom: 2vh;
+}
+.flight_details_content_left_1 {
+  height: 15vh;
+  border-bottom: 2px dashed #c7cdd0d9 !important;
+  /* margin-right: 10vw; */
+}
+.flight_details_content_left_1::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  /* background: lightblue; */
+  border-radius: 50%;
+  top: 7.5vh;
+  left: -15px;
+  box-shadow: 0px 47px 0 0 #f5f7fb;
+}
+.flight_details_content_left_1::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  /* background: lightblue; */
+  border-radius: 50%;
+  top: 7.5vh;
+  right: -1vw;
+  box-shadow: 0px 47px 0 0 #f5f7fb;
 }

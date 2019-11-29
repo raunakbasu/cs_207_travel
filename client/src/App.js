@@ -5,6 +5,8 @@ import Landing from "./components/Landing";
 import Navbar from "./components/Navbar";
 import FlightList from "./components/FlightList";
 import HotelsList from "./components/HotelsList";
+import Hotel from "./components/Hotel";
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route exact path="/" render={() => <Landing />} />
         <Route exact path="/flightlist" render={() => <FlightList />} />
         <Route exact path="/hotellist" render={() => <HotelsList />} />
+        <Route exact path="/hotel" render={() => <Hotel />} />
       </Router>
     </div>
   );

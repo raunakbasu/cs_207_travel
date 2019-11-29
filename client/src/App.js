@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route exact path="/" render={() => <Navbar />} />
+        
         <Route exact path="/" render={() => <Landing />} />
         <Route exact path="/flightlist" render={() => <FlightList />} />
         <Route exact path="/hotellist" render={() => <HotelsList />} />

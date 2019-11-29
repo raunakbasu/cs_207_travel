@@ -287,7 +287,11 @@ class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <div className="landing_first" />
+        <div className="landing_first">
+          <div className="container">
+            <h1 className="main_heading">EXPLORE</h1>
+          </div>
+        </div>
         <div className="landing_search">
           <div className="col-xs-12 ">
             <nav>

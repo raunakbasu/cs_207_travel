@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import FlightList from "./components/FlightList";
 import HotelsList from "./components/HotelsList";
 import Hotel from "./components/Hotel";
+import Flight from "./components/Flight";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/flightlist" render={() => <FlightList />} />
         <Route exact path="/hotellist" render={() => <HotelsList />} />
         <Route exact path="/hotel" render={() => <Hotel />} />
+        <Route exact path="/flight" render={() => <Flight />} />
       </Router>
     </div>
   );

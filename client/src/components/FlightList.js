@@ -2,8 +2,18 @@ import React, { Component } from "react";
 import map from "../utils/img/map.png";
 import plane from "../utils/img/flight.png";
 import next from "../utils/img/next.webp";
+import ryan from "../utils/img/ryan.png";
+import air from "../utils/img/air.png";
 
 class FlightList extends Component {
+  state = {
+    content: false
+  };
+  handleChange = () => {
+    this.setState({
+      content: !this.state.content
+    });
+  };
   render() {
     return (
       <div className="flightlist">
@@ -145,7 +155,9 @@ class FlightList extends Component {
                 <small>Business from</small>
               </li>
               <li className="flightlist_right_list_item">
-                <button>Details</button>
+                <button onClick = {this.handleChange} className="toggleFlight">
+                  {this.state.content ? "Close" : "Details"}
+                </button>
                 <br />
                 <br />
               </li>
@@ -155,6 +167,76 @@ class FlightList extends Component {
                 <br />
               </li>
             </ul>
+            <div className="flightDetails">
+              <ul className="flightDetails_list">
+                <li className="flightDetails_list_item">
+                  <ul className="flight_details_list">
+                    <li className="flight_details_list_item">
+                      <img src={ryan} className="flight_logo" />
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2">
+                        British Airways
+                      </h2>
+                      <br />
+                      <small>BI 765</small>
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2 divi">SFO</h2>
+                      <br />
+                      <small>13:00</small>
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2">
+                        <i class="fas fa-plane-departure" />
+                        6H 20M
+                        <i class="fas fa-plane-arrival" />
+                      </h2>
+                      <br />
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2">DEL</h2>
+                      <br />
+                      <small>19:00</small>
+                    </li>
+                  </ul>
+                </li>
+                <hr className="break_hr" />
+                <li className="flightDetails_list_item">
+                  <ul className="flight_details_list">
+                    <li className="flight_details_list_item">
+                      <img src={air} className="flight_logo" />
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2">
+                        British Airways
+                      </h2>
+                      <br />
+                      <small>BI 765</small>
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2 divi">SFO</h2>
+                      <br />
+                      <small>13:00</small>
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2">
+                        <i class="fas fa-plane-departure" />
+                        6H 20M
+                        <i class="fas fa-plane-arrival" />
+                      </h2>
+                      <br />
+                    </li>
+                    <li className="flight_details_list_item">
+                      <h2 className="flight_details_list_item_h2">DEL</h2>
+                      <br />
+                      <small>19:00</small>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
             <hr />
             <ul className="flightlist_right_list">
               <li className="flightlist_right_list_item">

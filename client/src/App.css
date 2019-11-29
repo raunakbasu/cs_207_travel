@@ -759,6 +759,10 @@ h6 {
   z-index: 2;
   /* margin-top: 2%; */
 }
+.lolol {
+  margin-top: 1.5% !important;
+  z-index: 69;
+}
 .hotels_top_search {
   position: absolute;
   height: 9vh;
@@ -1008,11 +1012,14 @@ h6 {
   background-color: rgba(54, 123, 255, 1) !important;
 }
 
+/* Single hotel goes here */
+
 .hotel {
   background: #f5f7fb;
   height: auto;
   min-height: 90vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 figure {
@@ -1245,4 +1252,122 @@ figure {
   font-size: 20px !important;
   font-weight: 600;
   border: none !important;
+}
+.amenities {
+  height: 35vh;
+  background: #fff;
+  position: absolute;
+  margin-top: -15vh !important;
+  left: 22vw;
+  right: 3vw;
+  float: right;
+  /* margin-right: 5vw !important; */
+  border: 8px solid rgba(54, 123, 255, 1) !important;
+  border-radius: 50%;
+  max-width: 35vh !important;
+  line-height: 50px;
+}
+.hotel_des {
+  height: 50vh;
+  /* background: #fff; */
+  position: relative;
+  top: -25vh;
+  left: 3vw;
+  right: 5vw;
+  text-align: left;
+  font-family: "Baskervville", serif;
+  letter-spacing: 0.05rem;
+  /* width: 70vw !important; */
+  color: #3d3f42;
+  font-size: 18px;
+}
+.hotelss {
+  display: flex;
+}
+.hotel_des_list {
+  margin-top: -3%;
+}
+.hotel_des_list_item {
+  list-style: none;
+  display: inline-block;
+  width: 15vw;
+  margin-top: 5vh;
+  color: #3d3f42;
+  font-family: "Nunito", serif;
+  font-size: 20px;
+}
+.hotel_des_list_item > span {
+  color: #3d3f42;
+}
+.hotel_des_list_item > i {
+  color: rgba(54, 123, 255, 1);
+}
+.description_head {
+  font-family: "Nunito", serif;
+  font-size: 30px;
+  margin-top: 5vh;
+  margin-left: 2vw;
+}
+.hotel_des_p {
+  width: 35vw;
+  position: relative;
+  left: 19vw;
+  margin-top: -4vh;
+  font-size: 19px !important;
+}
+.show_more {
+  position: relative;
+  left: 19vw;
+}
+.hotel_rating {
+  font-size: 80px;
+  /* font-family: "Nunito", serif; */
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  position: relative;
+  top: 5vh;
+}
+.hotel_review_count {
+  font-size: 30px;
+  /* font-family: "Nunito", serif; */
+  font-family: "Nunito", serif;
+  font-weight: 600;
+  position: relative;
+  top: 5vh;
+}
+.reviews_list_item {
+  /* list-style: none; */
+  width: 20vw !important;
+  list-style: none;
+  display: inline-block !important;
+  margin-left: 5vw;
+  margin-top: 5vh;
+}
+.reviews_list {
+  /* display: flex; */
+  /* display: inline; */
+  width: 95vw !important;
+  margin-left: 12vw;
+  margin-top: -10vh;
+}
+.review_p {
+}
+.review_name {
+}
+.view_more_reviews {
+  height: 8vh;
+  width: 18vw;
+  position: relative;
+  top: -20vh !important;
+  font-size: 19px !important;
+  font-family: "Nunito", serif;
+  background: #feb911;
+  color: #3d3f42;
+  transition: 0.2s all ease-in-out;
+}
+.view_more_reviews:hover {
+  background: transparent !important;
+  border: 3px solid #feb911;
+  transition: 0.2s linear;
+  transition: 0.2s all ease-in-out;
 }

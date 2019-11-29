@@ -230,10 +230,10 @@ class Landing extends Component {
         languagecode: "en-us",
         search_type: "city",
         offset: "0",
-        dest_ids: this.state.finalLocation,
+        dest_ids: "-2167973",
         guest_qty: "1",
-        arrival_date: this.state.fromHotelDate,
-        departure_date: this.state.toHotelDate,
+        arrival_date: "2019-12-01",
+        departure_date: "2019-12-10",
         room_qty: "1"
       }
     })
@@ -244,6 +244,27 @@ class Landing extends Component {
         console.log(error);
       });
   };
+
+  getPhotos = () => {
+    axios({
+    "method":"GET",
+    "url":"https://apidojo-booking-v1.p.rapidapi.com/properties/get-hotel-photos",
+    "headers":{
+    "content-type":"application/octet-stream",
+    "x-rapidapi-host":"apidojo-booking-v1.p.rapidapi.com",
+    "x-rapidapi-key":"FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
+    },"params":{
+    "languagecode":"en-us",
+    "hotel_ids":"1950932"
+    }
+    })
+    .then((response)=>{
+      console.log(response)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
   handleSelectFromHotel = date => {
     console.log(date._d);
@@ -421,7 +442,7 @@ class Landing extends Component {
                       type="submit"
                       className="form-control form-control-lg text_field text-field submit_button"
                       value="Find Hotels"
-                      onClick={this.getHotelsList}
+                      onClick={this.getPhotos}
                     />
                   </li>
                 </ul>

@@ -247,23 +247,25 @@ class Landing extends Component {
 
   getPhotos = () => {
     axios({
-    "method":"GET",
-    "url":"https://apidojo-booking-v1.p.rapidapi.com/properties/get-hotel-photos",
-    "headers":{
-    "content-type":"application/octet-stream",
-    "x-rapidapi-host":"apidojo-booking-v1.p.rapidapi.com",
-    "x-rapidapi-key":"FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
-    },"params":{
-    "languagecode":"en-us",
-    "hotel_ids":"1950932"
-    }
-    })
-    .then((response)=>{
-      console.log(response)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+      "method":"GET",
+      "url":"https://apidojo-booking-v1.p.rapidapi.com/properties/get-description",
+      "headers":{
+      "content-type":"application/octet-stream",
+      "x-rapidapi-host":"apidojo-booking-v1.p.rapidapi.com",
+      "x-rapidapi-key":"FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
+      },"params":{
+      "check_out":"2019-12-15",
+      "languagecode":"en-us",
+      "check_in":"2019-12-13",
+      "hotel_ids":"1498618"
+      }
+      })
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
   }
 
   handleSelectFromHotel = date => {

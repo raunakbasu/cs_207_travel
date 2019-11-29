@@ -1007,3 +1007,242 @@ h6 {
 .more_button:hover {
   background-color: rgba(54, 123, 255, 1) !important;
 }
+
+.hotel {
+  background: #f5f7fb;
+  height: auto;
+  min-height: 90vh;
+  width: 100vw;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+  /* margin-top: -5% !important; */
+}
+
+@media (max-width: 756px) {
+  .gallery {
+    display: block;
+  }
+}
+@media (min-width: 757px) {
+  .gallery {
+    display: grid;
+  }
+}
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.wrap {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.gallery {
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 5vw);
+  grid-gap: 5px;
+  width: 100%;
+  margin-top: 2vh;
+  padding-top: 200px;
+  margin-left: -19vw;
+}
+
+.gallery__item--1 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border-top-left-radius: 20px;
+}
+
+.gallery__item--2 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.gallery__item--3 {
+  grid-column-start: 5;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.gallery__item--4 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 6;
+  border-bottom-left-radius: 20px;
+  margin-top: -3.5%;
+}
+
+/* .gallery__item--5 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 9;
+}
+
+.gallery__item--6 {
+  grid-column-start: 5;
+  grid-column-end: 9;
+  grid-row-start: 6;
+  grid-row-end: 9;
+} */
+
+.gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s linear;
+}
+
+.gallery__item {
+  overflow: hidden;
+}
+
+.gallery__item > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery__img:hover {
+  opacity: 0.5;
+  transition: 0.4s linear;
+  transform: scale(1.1);
+  /* border: 3px solid #000 !important; */
+}
+
+.lightbox {
+  position: fixed;
+  z-index: 999;
+  height: 0;
+  width: 0;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lightbox img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+.lightbox:target {
+  outline: none;
+  width: 100%;
+  height: 100%;
+  opacity: 1 !important;
+}
+
+.lightbox:target img {
+  opacity: 1;
+  transition: opacity 0.6s;
+  transition: opacity 0.6s;
+}
+
+.btn-close {
+  font-size: 45px;
+  /* content: "CLOSE"; */
+  display: block;
+  margin: 0 auto;
+  max-width: 200px;
+  width: 100%;
+  padding: 0 20px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none !important;
+  height: auto;
+}
+
+.hotels_main_info {
+  position: absolute;
+  /* background: #00b074; */
+  width: 35vw;
+  height: 45vh;
+  float: right;
+  top: 26vh;
+  right: 5vh;
+}
+.hotels_main_info_heading {
+  font-family: "Playfair Display", serif;
+  color: rgba(54, 123, 255, 1);
+  font-weight: 500;
+  font-size: 40px;
+  text-align: left;
+}
+.light_location {
+  font-size: 20px;
+  text-align: left;
+  font-family: "Nunito", serif;
+  color: #feb911;
+  /* margin-top */
+}
+.light_location > span {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgba(54, 123, 255, 1);
+}
+.hotels_main_info_para {
+  font-size: 20px;
+  font-family: "Nunito", serif;
+  text-align: left;
+  color: #717375;
+}
+.hotels_main_info_price {
+  font-family: "Playfair Display", serif;
+  font-size: 45px;
+  text-align: left;
+  color: #3d3f42;
+}
+.hotels_main_info_price > span {
+  font-family: "Nunito", serif;
+  font-size: 20px;
+  padding-right: 5px;
+}
+.notify {
+  text-align: left;
+  color: rgba(54, 123, 255, 1);
+  font-family: "Nunito", serif;
+  font-size: 18px;
+  position: relative;
+  top: 2vh;
+  left: -9vw;
+  padding-left: 20px;
+}
+.notify > span {
+  color: "Nunito", serif;
+  color: #feb911;
+}
+.now_hotel {
+  /* float: left; */
+  margin-top: 7vh !important;
+  float: left;
+  height: 6.5vh !important;
+  width: 17vw !important;
+  background: rgba(54, 123, 255, 1) !important;
+  border-radius: 5px;
+  color: #fff;
+  font-family: "Nunito", serif;
+  font-size: 20px !important;
+  font-weight: 600;
+  border: none !important;
+}

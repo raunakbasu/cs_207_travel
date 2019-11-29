@@ -1561,3 +1561,80 @@ figure {
 .flight_leftt {
   margin-top: 5vh;
 }
+
+.flightDetails {
+    width: 56.5vw;
+    height: auto;
+    /* min-height: 15vh; */
+    /* background: green; */
+    margin-top: 10px;
+    display: none;
+}
+
+/* .example-enter {
+    height: 0px;
+}
+
+.example-enter.example-enter-active {
+    height: 600px;
+    -webkit-transition: height .3s ease;
+}
+
+.example-leave.example-leave-active {
+    height: 0px;
+    -webkit-transition: height .3s ease;
+} */
+.flightDetails_list_item{
+  list-style: none;
+  height: 15vh;
+  /* background: red; */
+}
+.flightDetails_list{
+
+}
+.flight_details_list_item{
+  list-style: none;
+  display: inline-block;
+  text-align: left;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.flight_details_list{
+  /* background: blue; */
+  margin-left: -6.5vw;
+  margin-top: 5vh;
+  /* border-bottom: 2px dashed #000; */
+  /* margin-left: 4vw; */
+
+}
+.flight_details_list_item_h2{
+  font-family: 'Nunito', serif;
+  font-size: 20px;
+}
+.flight_logo {
+  width: 16vw;
+  height: auto;
+  margin: 0 auto;
+  /* line-height: 20px; */
+  margin-top: -7vh;
+
+}
+.flight_details_list_item_h2 > i {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgba(54, 123, 255, 1);
+
+}
+.divi{
+  /* color: red !important; */
+  margin-left: -1vw;
+  /* margin-right: 1vw; */
+}
+.break_hr{
+  border-top: 1px dashed #d1d5da;
+  width: 55vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-left: -1.5vw;
+  padding-bottom: 4vh;
+}

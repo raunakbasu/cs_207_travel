@@ -1564,12 +1564,16 @@ figure {
 }
 
 .flightDetails {
+  /* display: none; */
     width: 56.5vw;
     height: auto;
     /* min-height: 15vh; */
     /* background: green; */
     margin-top: 10px;
-    display: none;
+
+}
+#flightDetails{
+  display:none;
 }
 
 /* .example-enter {

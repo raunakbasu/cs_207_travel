@@ -8,20 +8,22 @@ import About from "./About";
 import BlogPost from "./BlogPost";
 import Newsletter from "./Newsletter";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 class Landing extends Component {
   state = {
     from: "Delhi",
     fromFinal: "DEL-sky",
     to: "San Francisco",
-    finalTo: "SFO-sky",
-    fromDate: "",
-    toDate: "",
+    finalTo: "LIS-sky",
+    fromDate: "2019-12-01",
+    toDate: "2019-12-10",
     session: "",
     location: "",
-    finalLocation: "",
-    fromHotelDate: "",
-    toHotelDate: ""
+    finalLocation: "-2167973",
+    fromHotelDate: "2019-12-01",
+    toHotelDate: "2019-12-10",
+    flight: {}
   };
 
   //###########################################################
@@ -127,7 +129,7 @@ class Landing extends Component {
     });
 
     req.form({
-      inboundDate: this.state.toDate,
+      inboundDate: "",
       cabinClass: "economy",
       children: "0",
       infants: "0",
@@ -145,7 +147,7 @@ class Landing extends Component {
       let x = res.headers.location;
       y = x.split("/");
       let z = y[y.length - 1];
-      console.log(z);
+      // console.log(z);
       this.setState({
         session: y[y.length - 1]
       });
@@ -170,7 +172,11 @@ class Landing extends Component {
       }
     })
       .then(response => {
-        console.log(response);
+        // console.log(response);
+        this.setState({
+          flight: response.data
+        });
+        // console.log(this.state.flight);
       })
       .catch(error => {
         console.log(error);
@@ -247,26 +253,28 @@ class Landing extends Component {
 
   getPhotos = () => {
     axios({
-      "method":"GET",
-      "url":"https://apidojo-booking-v1.p.rapidapi.com/properties/get-description",
-      "headers":{
-      "content-type":"application/octet-stream",
-      "x-rapidapi-host":"apidojo-booking-v1.p.rapidapi.com",
-      "x-rapidapi-key":"FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
-      },"params":{
-      "check_out":"2019-12-15",
-      "languagecode":"en-us",
-      "check_in":"2019-12-13",
-      "hotel_ids":"1498618"
+      method: "GET",
+      url:
+        "https://apidojo-booking-v1.p.rapidapi.com/properties/get-description",
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host": "apidojo-booking-v1.p.rapidapi.com",
+        "x-rapidapi-key": "FUtTTNdLztmsh6S1nSNSqa78mgO5p1xZXFMjsnsVQl6Hlw3Nvz"
+      },
+      params: {
+        check_out: "2019-12-15",
+        languagecode: "en-us",
+        check_in: "2019-12-13",
+        hotel_ids: "1498618"
       }
+    })
+      .then(response => {
+        console.log(response);
       })
-      .then((response)=>{
-        console.log(response)
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
-  }
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   handleSelectFromHotel = date => {
     console.log(date._d);
@@ -382,12 +390,18 @@ class Landing extends Component {
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <input
-                      type="submit"
-                      className="form-control form-control-lg text_field text-field submit_button"
-                      value="Find Flights"
-                      onClick={this.getFlights}
-                    />
+                    <Link
+                      to={`/flightList/${this.state.fromFinal}, ${
+                        this.state.finalTo
+                      }, ${this.state.fromDate}`}
+                    >
+                      <input
+                        type="submit"
+                        className="form-control form-control-lg text_field text-field submit_button"
+                        value="Find Flights"
+                        onClick={this.getFlights}
+                      />
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -444,12 +458,18 @@ class Landing extends Component {
                     />
                   </li>
                   <li className="bullshit_one_1">
-                    <input
-                      type="submit"
-                      className="form-control form-control-lg text_field text-field submit_button"
-                      value="Find Hotels"
-                      onClick={this.getPhotos}
-                    />
+                    <Link
+                      to={`/hotellist/${this.state.finalLocation}, ${
+                        this.state.toHotelDate
+                      }, ${this.state.fromHotelDate}`}
+                    >
+                      <input
+                        type="submit"
+                        className="form-control form-control-lg text_field text-field submit_button"
+                        value="Find Hotels"
+
+                      />
+                    </Link>
                   </li>
                 </ul>
               </div>

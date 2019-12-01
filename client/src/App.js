@@ -8,15 +8,17 @@ import HotelsList from "./components/HotelsList";
 import Hotel from "./components/Hotel";
 import Flight from "./components/Flight";
 
-
 function App() {
   return (
     <div className="App">
       <Router>
-        
         <Route exact path="/" render={() => <Landing />} />
-        <Route exact path="/flightlist" render={() => <FlightList />} />
-        <Route exact path="/hotellist" render={() => <HotelsList />} />
+        <Route
+          exact
+          path={"/flightlist/:v1,:v2,:v3"}
+          component={FlightList}
+        />
+        <Route exact path="/hotellist/:a1,:a2,:a3" component={HotelsList} />
         <Route exact path="/hotel" render={() => <Hotel />} />
         <Route exact path="/flight" render={() => <Flight />} />
       </Router>

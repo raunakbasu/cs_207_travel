@@ -4,36 +4,274 @@ import plane from "../utils/img/flight.png";
 import next from "../utils/img/next.webp";
 import ryan from "../utils/img/ryan.png";
 import air from "../utils/img/air.png";
+import axios from "axios";
+import unirest from "unirest";
 
 class FlightList extends Component {
   state = {
-    content: false
+    content: false,
+    details: {},
+    carrier: {},
+    legs: {},
+    places: {},
+    itineraries: {},
+    agents: {},
+    segments: {}
   };
+
+  componentDidMount() {
+    console.log(this.props.match.params.v2);
+    this.getFlights(
+      this.props.match.params.v1,
+      this.props.match.params.v2,
+      this.props.match.params.v3,
+    );
+
+  }
+
+
+
+
+
+
+
   handleChange = () => {
     this.setState({
       content: !this.state.content
     });
+    console.log("lmao");
   };
+
+  // create a session and then poll session results
+
+  getFlights = (a, b, c) => {
+    console.log(a, b.trim(), c);
+    let y;
+    var req = unirest(
+      "POST",
+      "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
+    );
+
+    req.headers({
+      "x-rapidapi-host":
+        "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+      "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005",
+      "content-type": "application/x-www-form-urlencoded"
+    });
+
+    req.form({
+      inboundDate: "",
+      cabinClass: "economy",
+      children: "0",
+      infants: "0",
+      country: "US",
+      currency: "USD",
+      locale: "en-US",
+      originPlace: a.trim(),
+      destinationPlace: b.trim(),
+      outboundDate: c.trim(),
+      adults: "1"
+    });
+
+    req.end(res => {
+      if (res.error) throw new Error(res.error);
+      let x = res.headers.location;
+      y = x.split("/");
+      let z = y[y.length - 1];
+      console.log(z);
+      this.setState({
+        session: y[y.length - 1]
+      });
+      this.getFlightsFinal(z);
+    });
+  };
+
+  getFlightsFinal = session => {
+    console.log("Z", session);
+    axios({
+      method: "GET",
+      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/${session}?sortType=duration&sortOrder=asc&pageIndex=0&pageSize=10`,
+      headers: {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host":
+          "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f251de0f98msh616a56f76aa80abp10ca81jsn82b6415d9005"
+      },
+      params: {
+        pageIndex: "0",
+        pageSize: "10"
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.setState({
+          details: response.data,
+          carrier: response.data.Carriers,
+          legs: response.data.Legs,
+          places: response.data.Places,
+          segments: response.data.Segments,
+          agents: response.data.Agents,
+          itineraries: response.data.Itineraries
+        });
+        // console.log(this.state);
+        Object.keys(this.state.itineraries).map((key, index) => {
+          // console.log(this.state.itineraries[key].OutboundLegId);
+          this.getLegsDetails(this.state.itineraries[key].OutboundLegId)
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  getLegsDetails = (itiernary) => {
+    for (let i = 0 ; i < Object.keys(this.state.legs).length ; i++) {
+      if ( this.state.legs[i].Id === itiernary){
+        console.log(this.state.legs[i])
+      }
+    }
+  }
+
+
+
+
   render() {
+    const itemss = Object.keys(this.state.carrier).map((key, index) => (
+      <div classname="flightToggle">
+        <ul className="flightlist_right_list">
+          <li className="flightlist_right_list_item">
+            <h3 className="flightlist_right_list_item_h3">16:15</h3>
+            <br />
+            <small>Departure</small>
+          </li>
+          <li className="flightlist_right_list_item">
+            <span>&#8226;&#8226;&#8226;</span>
+
+            <small className="stop">0 Stops</small>
+            <span>&#8226;&#8226;&#8226;</span>
+            <br />
+            <br />
+            <small>5 hours 35 mins</small>
+          </li>
+          <li className="flightlist_right_list_item">
+            <h3 className="flightlist_right_list_item_h3">21:44</h3>
+            <br />
+            <small>Arrival</small>
+          </li>
+          <li className="flightlist_right_list_item">
+            <h3 className="flightlist_right_list_item_h3">$140</h3>
+            <br />
+            <small>Economy from</small>
+          </li>
+          <li className="flightlist_right_list_item">
+            <h3 className="flightlist_right_list_item_h3">$450</h3>
+            <br />
+            <small>Business from</small>
+          </li>
+          <li className="flightlist_right_list_item">
+            <button className="toggleFlight">Details</button>
+            <br />
+            <br />
+          </li>
+          <li className="flightlist_right_list_item ">
+            <button className="ll">Book Now</button>
+            <br />
+            <br />
+          </li>
+        </ul>
+
+        <div className="flightDetails" id="flightDetails">
+          <ul className="flightDetails_list">
+            <li className="flightDetails_list_item">
+              <ul className="flight_details_list">
+                <li className="flight_details_list_item">
+                  <img src={ryan} alt="flight_logo" className="flight_logo" />
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2">
+                    British Airways
+                  </h2>
+                  <br />
+                  <small>BI 765</small>
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2 divi">SFO</h2>
+                  <br />
+                  <small>13:00</small>
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2">
+                    <i class="fas fa-plane-departure" />
+                    6H 20M
+                    <i class="fas fa-plane-arrival" />
+                  </h2>
+                  <br />
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2">DEL</h2>
+                  <br />
+                  <small>19:00</small>
+                </li>
+              </ul>
+            </li>
+            <hr className="break_hr" />
+            <li className="flightDetails_list_item">
+              <ul className="flight_details_list">
+                <li className="flight_details_list_item">
+                  <img src={air} alt="flight_logo" className="flight_logo" />
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2">
+                    British Airways
+                  </h2>
+                  <br />
+                  <small>BI 765</small>
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2 divi">SFO</h2>
+                  <br />
+                  <small>13:00</small>
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2">
+                    <i class="fas fa-plane-departure" />
+                    6H 20M
+                    <i class="fas fa-plane-arrival" />
+                  </h2>
+                  <br />
+                </li>
+                <li className="flight_details_list_item">
+                  <h2 className="flight_details_list_item_h2">DEL</h2>
+                  <br />
+                  <small>19:00</small>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <hr />
+        </div>
+      </div>
+    ));
     return (
       <div className="flightlist">
         <div className="hotels_top flights_top">
           <div className="hotels_top_search flights_top_search">
             <ul className="hotels_top_search_list flights_top_search_list ">
               <li className="hotels_top_search_list_item flights_top_search_list_item">
-                <i class="fas fa-map-marker-alt" />
+                <i className="fas fa-map-marker-alt" />
                 <input type="text" placeholder="DELHI" />
               </li>
               <li className="hotels_top_search_list_item flights_top_search_list_item">
-                <i class="fas fa-map-marker-alt" />
+                <i className="fas fa-map-marker-alt" />
                 <input type="text" placeholder="LISBON" />
               </li>
               <li className="hotels_top_search_list_item flights_top_search_list_item">
-                <i class="fas fa-calendar-alt" />
+                <i className="fas fa-calendar-alt" />
                 <input type="text" placeholder="2019-12-01" />
               </li>
               <li className="hotels_top_search_list_item flights_top_search_list_item">
-                <i class="fas fa-calendar-alt" />
+                <i className="fas fa-calendar-alt" />
                 <input type="text" placeholder="2019-12-10" />
               </li>
               <li className="hotels_top_search_list_item flights_top_search_list_item">
@@ -124,246 +362,139 @@ class FlightList extends Component {
                 </li>
               </ul>
             </div>
-            <ul className="flightlist_right_list">
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">16:15</h3>
-                <br />
-                <small>Departure</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <span>&#8226;&#8226;&#8226;</span>
 
-                <small className="stop">0 Stops</small>
-                <span>&#8226;&#8226;&#8226;</span>
-                <br />
-                <br />
-                <small>5 hours 35 mins</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">21:44</h3>
-                <br />
-                <small>Arrival</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$140</h3>
-                <br />
-                <small>Economy from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$450</h3>
-                <br />
-                <small>Business from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <button onClick = {this.handleChange} className="toggleFlight">
-                  {this.state.content ? "Close" : "Details"}
-                </button>
-                <br />
-                <br />
-              </li>
-              <li className="flightlist_right_list_item ">
-                <button className="ll">Book Now</button>
-                <br />
-                <br />
-              </li>
-            </ul>
-            <div className="flightDetails">
-              <ul className="flightDetails_list">
-                <li className="flightDetails_list_item">
-                  <ul className="flight_details_list">
-                    <li className="flight_details_list_item">
-                      <img src={ryan} className="flight_logo" />
+            {/*Here goes the loop for the flight itineraries*/}
+
+            {/*itemss*/}
+            {Object.keys(this.state.carrier).map((key, index) => (
+              <div className="flightToggle" key={index}>
+                <ul className="flightlist_right_list">
+                  <li className="flightlist_right_list_item">
+                    <h3 className="flightlist_right_list_item_h3">16:15</h3>
+                    <br />
+                    <small>Departure</small>
+                  </li>
+                  <li className="flightlist_right_list_item">
+                    <span>&#8226;&#8226;&#8226;</span>
+
+                    <small className="stop">0 Stops</small>
+                    <span>&#8226;&#8226;&#8226;</span>
+                    <br />
+                    <br />
+                    <small>5 hours 35 mins</small>
+                  </li>
+                  <li className="flightlist_right_list_item">
+                    <h3 className="flightlist_right_list_item_h3">21:44</h3>
+                    <br />
+                    <small>Arrival</small>
+                  </li>
+                  <li className="flightlist_right_list_item">
+                    <h3 className="flightlist_right_list_item_h3">$140</h3>
+                    <br />
+                    <small>Economy from</small>
+                  </li>
+                  <li className="flightlist_right_list_item">
+                    <h3 className="flightlist_right_list_item_h3">$450</h3>
+                    <br />
+                    <small>Business from</small>
+                  </li>
+                  <li className="flightlist_right_list_item">
+                    <button className="toggleFlight">Details</button>
+                    <br />
+                    <br />
+                  </li>
+                  <li className="flightlist_right_list_item ">
+                    <button className="ll">Book Now</button>
+                    <br />
+                    <br />
+                  </li>
+                </ul>
+
+                <div className="flightDetails">
+                  <ul className="flightDetails_list">
+                    <li className="flightDetails_list_item">
+                      <ul className="flight_details_list">
+                        <li className="flight_details_list_item">
+                          <img
+                            src={ryan}
+                            alt="flight_logo"
+                            className="flight_logo"
+                          />
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2">
+                            British Airways
+                          </h2>
+                          <br />
+                          <small>BI 765</small>
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2 divi">
+                            SFO
+                          </h2>
+                          <br />
+                          <small>13:00</small>
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2">
+                            <i class="fas fa-plane-departure" />
+                            6H 20M
+                            <i class="fas fa-plane-arrival" />
+                          </h2>
+                          <br />
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2">DEL</h2>
+                          <br />
+                          <small>19:00</small>
+                        </li>
+                      </ul>
                     </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2">
-                        British Airways
-                      </h2>
-                      <br />
-                      <small>BI 765</small>
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2 divi">SFO</h2>
-                      <br />
-                      <small>13:00</small>
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2">
-                        <i class="fas fa-plane-departure" />
-                        6H 20M
-                        <i class="fas fa-plane-arrival" />
-                      </h2>
-                      <br />
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2">DEL</h2>
-                      <br />
-                      <small>19:00</small>
+                    <hr className="break_hr" />
+                    <li className="flightDetails_list_item">
+                      <ul className="flight_details_list">
+                        <li className="flight_details_list_item">
+                          <img
+                            src={air}
+                            alt="flight_logo"
+                            className="flight_logo"
+                          />
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2">
+                            British Airways
+                          </h2>
+                          <br />
+                          <small>BI 765</small>
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2 divi">
+                            SFO
+                          </h2>
+                          <br />
+                          <small>13:00</small>
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2">
+                            <i class="fas fa-plane-departure" />
+                            6H 20M
+                            <i class="fas fa-plane-arrival" />
+                          </h2>
+                          <br />
+                        </li>
+                        <li className="flight_details_list_item">
+                          <h2 className="flight_details_list_item_h2">DEL</h2>
+                          <br />
+                          <small>19:00</small>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
-                </li>
-                <hr className="break_hr" />
-                <li className="flightDetails_list_item">
-                  <ul className="flight_details_list">
-                    <li className="flight_details_list_item">
-                      <img src={air} className="flight_logo" />
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2">
-                        British Airways
-                      </h2>
-                      <br />
-                      <small>BI 765</small>
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2 divi">SFO</h2>
-                      <br />
-                      <small>13:00</small>
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2">
-                        <i class="fas fa-plane-departure" />
-                        6H 20M
-                        <i class="fas fa-plane-arrival" />
-                      </h2>
-                      <br />
-                    </li>
-                    <li className="flight_details_list_item">
-                      <h2 className="flight_details_list_item_h2">DEL</h2>
-                      <br />
-                      <small>19:00</small>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
 
-            <hr />
-            <ul className="flightlist_right_list">
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">16:15</h3>
-                <br />
-                <small>Departure</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <span>&#8226;&#8226;&#8226;</span>
-
-                <small className="stop">0 Stops</small>
-                <span>&#8226;&#8226;&#8226;</span>
-                <br />
-                <br />
-                <small>5 hours 35 mins</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">21:44</h3>
-                <br />
-                <small>Arrival</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$140</h3>
-                <br />
-                <small>Economy from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$450</h3>
-                <br />
-                <small>Business from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <button>Details</button>
-                <br />
-                <br />
-              </li>
-              <li className="flightlist_right_list_item ">
-                <button className="ll">Book Now</button>
-                <br />
-                <br />
-              </li>
-            </ul>
-            <hr />
-            <ul className="flightlist_right_list">
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">16:15</h3>
-                <br />
-                <small>Departure</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <span>&#8226;&#8226;&#8226;</span>
-
-                <small className="stop">0 Stops</small>
-                <span>&#8226;&#8226;&#8226;</span>
-                <br />
-                <br />
-                <small>5 hours 35 mins</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">21:44</h3>
-                <br />
-                <small>Arrival</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$140</h3>
-                <br />
-                <small>Economy from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$450</h3>
-                <br />
-                <small>Business from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <button>Details</button>
-                <br />
-                <br />
-              </li>
-              <li className="flightlist_right_list_item ">
-                <button className="ll">Book Now</button>
-                <br />
-                <br />
-              </li>
-            </ul>
-            <hr />
-            <ul className="flightlist_right_list">
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">16:15</h3>
-                <br />
-                <small>Departure</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <span>&#8226;&#8226;&#8226;</span>
-
-                <small className="stop">0 Stops</small>
-                <span>&#8226;&#8226;&#8226;</span>
-                <br />
-                <br />
-                <small>5 hours 35 mins</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">21:44</h3>
-                <br />
-                <small>Arrival</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$140</h3>
-                <br />
-                <small>Economy from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <h3 className="flightlist_right_list_item_h3">$450</h3>
-                <br />
-                <small>Business from</small>
-              </li>
-              <li className="flightlist_right_list_item">
-                <button>Details</button>
-                <br />
-                <br />
-              </li>
-              <li className="flightlist_right_list_item ">
-                <button className="ll">Book Now</button>
-                <br />
-                <br />
-              </li>
-            </ul>
-            <hr />
+                  <hr />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

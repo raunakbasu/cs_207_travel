@@ -73,9 +73,24 @@
     <script>
       $(document).ready(function() {
         $(".toggleFlight").click(function() {
-          $(".flightDetails").slideToggle("slow");
+          console.log("hahahaah");
+          $(this)
+            .parent()
+            .parent()
+            .parent()
+            .children(".flightDetails")
+            .slideToggle("slow");
         });
       });
+
+      // $(function(){
+      //   $("ul[id|=Nested]").hide();
+      //
+      //   $("a[id|=trigger_Nested]").click(function() {
+      //     $(this).siblings("ul").slideToggle("fast");
+      //     return false;
+      //   });
+      // });
     </script>
   </body>
 </html>

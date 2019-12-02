@@ -16,7 +16,7 @@ class Landing extends Component {
     fromFinal: "DEL-sky",
     to: "San Francisco",
     finalTo: "LIS-sky",
-    fromDate: "2019-12-01",
+    fromDate: "2019-12-05",
     toDate: "2019-12-10",
     session: "",
     location: "",
@@ -391,7 +391,7 @@ class Landing extends Component {
                   </li>
                   <li className="bullshit_one_1">
                     <Link
-                      to={`/flightList/${this.state.fromFinal}, ${
+                      to={`/flightlist/${this.state.fromFinal}, ${
                         this.state.finalTo
                       }, ${this.state.fromDate}`}
                     >

@@ -127,37 +127,87 @@ class FlightList extends Component {
     }
   };
 
-  getLegsDetails = itiernary => {
-    for (let i = 0; i < 1; i++) {
-      if (this.state.legs[i].Id === itiernary) {
-        let originStation = this.state.legs[i].OriginStation;
-        let destinationStation;
-
-        // console.log(typeof(this.state.legs[i]));
-      //   for (let j = 0; j <= Object.keys(this.state.legs[i].Stops).length ; j++) {
-      //     // console.log(j ,this.state.legs[i].Stops[j]);
-      //     if (j < Object.keys(this.state.legs[i].Stops).length){
-      //       destinationStation = this.state.legs[i].Stops[j];
-      //     }
-      //      if(j === Object.keys(this.state.legs[i].Stops).length){
-      //       destinationStation = this.state.legs[i].DestinationStation;
-      //     }
-      //     for (let k = 0 ; k < Object.keys(this.state.segments).length ; k++){
-      //       // console.log(originStation, destinationStation)
-      //       if (this.state.segments[k].OriginStation === originStation && this.state.segments[k].DestinationStation === this.state.legs[i].Stops[j]) {
-      //         console.log(i,j,k, this.state.segments[k]);
-      //         // originStation = this.state.segments[k].OriginStation;
-      //       }
-      //     }
-      //     originStation = this.state.legs[i].Stops[j]
-      //
-      //
-      // }
-
-      // for 
+  // Get Carrier Details
+  getCarrier = (carrier) => {
+    for (let i = 0 ; i < Object.keys(this.state.carrier).length ; i++) {
+      if (this.state.carrier[i].Id === carrier) {
+        return this.state.carrier[i];
+      }
     }
   }
+
+  // Get Place details
+  getPlace = (place) => {
+    for (let i = 0 ; i < Object.keys(this.state.places).length ; i++){
+      if(this.state.places[i].Id === place) {
+        return this.state.places[i];
+      }
+    }
+  }
+
+  // get Carrier image url
+  getCarrierImageUrl = (carrier) => {
+    for (let i = 0 ; i < Object.keys(this.state.carrier).length ; i++) {
+      if (this.state.carrier[i].Id === carrier) {
+        return this.state.carrier[i].ImageUrl;
+      }
+    }
+  }
+
+  getLegsDetails = itiernary => {
+    const flightFinalArray = []
+    for (let i = 0; i < 1; i++) {
+      if (this.state.legs[i].Id === itiernary) {
+        for (let j = 0 ; j < Object.keys(this.state.legs[i].SegmentIds).length ; j++) {
+          console.log(j ,this.state.segments[this.state.legs[i].SegmentIds[j]]);
+          const carrier = this.getCarrier(this.state.segments[this.state.legs[i].SegmentIds[j]].Carrier);
+          // console.log(carrier)
+          const originStation = this.getPlace(this.state.segments[this.state.legs[i].SegmentIds[j]].OriginStation);
+          const destinationStation = this.getPlace(this.state.segments[this.state.legs[i].SegmentIds[j]].DestinationStation);
+          const arrivalDate = this.state.segments[this.state.legs[i].SegmentIds[j]].ArrivalDateTime.slice(0, 10);
+          const departureDate = this.state.segments[this.state.legs[i].SegmentIds[j]].DepartureDateTime.slice(0, 10);
+          const arrivalTime = this.state.segments[this.state.legs[i].SegmentIds[j]].ArrivalDateTime.slice(11, 16);
+          const departureTime = this.state.segments[this.state.legs[i].SegmentIds[j]].DepartureDateTime.slice(11, 16);
+          const carrierImage = this.getCarrierImageUrl(this.state.segments[this.state.legs[i].SegmentIds[j]].Carrier);
+          flightFinalArray.push({
+            carrier: carrier,
+            originStation: originStation,
+            destinationStation: destinationStation,
+            arrivalDate: arrivalDate,
+            departureDate: departureDate,
+            arrivalTime: arrivalTime,
+            departureTime: departureTime,
+            carrierImage: carrierImage
+          })
+      }
+    }
+
+  }
+  console.log(flightFinalArray);
+
 }
+// let originStation = this.state.legs[i].OriginStation;
+// let destinationStation;
+// console.log(typeof(this.state.legs[i]));
+//   for (let j = 0; j <= Object.keys(this.state.legs[i].Stops).length ; j++) {
+//     // console.log(j ,this.state.legs[i].Stops[j]);
+//     if (j < Object.keys(this.state.legs[i].Stops).length){
+//       destinationStation = this.state.legs[i].Stops[j];
+//     }
+//      if(j === Object.keys(this.state.legs[i].Stops).length){
+//       destinationStation = this.state.legs[i].DestinationStation;
+//     }
+//     for (let k = 0 ; k < Object.keys(this.state.segments).length ; k++){
+//       // console.log(originStation, destinationStation)
+//       if (this.state.segments[k].OriginStation === originStation && this.state.segments[k].DestinationStation === this.state.legs[i].Stops[j]) {
+//         console.log(i,j,k, this.state.segments[k]);
+//         // originStation = this.state.segments[k].OriginStation;
+//       }
+//     }
+//     originStation = this.state.legs[i].Stops[j]
+//
+//
+// }
 
   render() {
     const itemss = Object.keys(this.state.carrier).map((key, index) => (

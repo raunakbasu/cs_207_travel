@@ -1441,7 +1441,8 @@ figure {
   overflow-x: hidden !important;
 }
 .flightlist_right_main {
-  height: 20vh;
+  height: auto;
+  min-height: 20vh !important;
   background: #fff;
   width: 58.35vw;
   margin-left: -0.9vw;
@@ -1467,6 +1468,8 @@ figure {
   font-size: 15px;
 }
 .flightlist_right_top_list_item_h2 {
+  width: 10vw !important;
+  font-size: 20px !important;
 }
 .plane {
   height: 4vh;
@@ -1642,6 +1645,7 @@ figure {
   margin: 0 auto;
   margin-left: -1.5vw;
   padding-bottom: 4vh;
+  margin-top: 5vh;
 }
 
 .main_heading{
@@ -1652,4 +1656,11 @@ opacity: 0.34;
 text-transform: uppercase;
 line-height: 0.75;
 padding-top: 27vh;
+}
+.flightToggle {
+  /* margin-top: 1vh !important; */
+}
+.flightDetails {
+  margin-top: 10vh !important;
+  /* padding-bottom: 5vh !important; */
 }

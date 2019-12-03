@@ -125,10 +125,12 @@ class FlightList extends Component {
             )
           });
         });
-        console.log("Final", finalFlightDetailsState);
+        // console.log("Final", finalFlightDetailsState);
         this.setState({
           final: finalFlightDetailsState
         });
+        console.log(this.state.final);
+        // {this.state.final[0].flight[0].originStation.Name}
       })
       .catch(error => {
         console.log(error);
@@ -282,37 +284,33 @@ class FlightList extends Component {
   // }
 
   render() {
-    const itemss = Object.keys(this.state.carrier).map((key, index) => (
-      <div classname="flightToggle">
+    const itemss = Object.keys(this.state.final).map((key, index) => (
+      <div className="flightToggle" key={index}>
         <ul className="flightlist_right_list">
           <li className="flightlist_right_list_item">
-            <h3 className="flightlist_right_list_item_h3">16:15</h3>
+            <h3 className="flightlist_right_list_item_h3">{this.state.final[key].flight[0].departureTime}</h3>
             <br />
             <small>Departure</small>
           </li>
           <li className="flightlist_right_list_item">
             <span>&#8226;&#8226;&#8226;</span>
 
-            <small className="stop">0 Stops</small>
+            <small className="stop">{this.state.final[key].flight[0].stops} Stops</small>
             <span>&#8226;&#8226;&#8226;</span>
             <br />
             <br />
             <small>5 hours 35 mins</small>
           </li>
           <li className="flightlist_right_list_item">
-            <h3 className="flightlist_right_list_item_h3">21:44</h3>
+            <h3 className="flightlist_right_list_item_h3">{this.state.final[key].flight[0].arrivalTime}</h3>
             <br />
             <small>Arrival</small>
           </li>
+
           <li className="flightlist_right_list_item">
-            <h3 className="flightlist_right_list_item_h3">$140</h3>
+            <h3 className="flightlist_right_list_item_h3">${this.state.final[key].flight[0].flightPrice.Price}</h3>
             <br />
-            <small>Economy from</small>
-          </li>
-          <li className="flightlist_right_list_item">
-            <h3 className="flightlist_right_list_item_h3">$450</h3>
-            <br />
-            <small>Business from</small>
+            <small>Price from</small>
           </li>
           <li className="flightlist_right_list_item">
             <button className="toggleFlight">Details</button>
@@ -326,79 +324,48 @@ class FlightList extends Component {
           </li>
         </ul>
 
-        <div className="flightDetails" id="flightDetails">
-          <ul className="flightDetails_list">
-            <li className="flightDetails_list_item">
-              <ul className="flight_details_list">
-                <li className="flight_details_list_item">
-                  <img src={ryan} alt="flight_logo" className="flight_logo" />
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2">
-                    British Airways
-                  </h2>
-                  <br />
-                  <small>BI 765</small>
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2 divi">SFO</h2>
-                  <br />
-                  <small>13:00</small>
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2">
-                    <i class="fas fa-plane-departure" />
-                    6H 20M
-                    <i class="fas fa-plane-arrival" />
-                  </h2>
-                  <br />
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2">DEL</h2>
-                  <br />
-                  <small>19:00</small>
-                </li>
-              </ul>
-            </li>
-            <hr className="break_hr" />
-            <li className="flightDetails_list_item">
-              <ul className="flight_details_list">
-                <li className="flight_details_list_item">
-                  <img src={air} alt="flight_logo" className="flight_logo" />
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2">
-                    British Airways
-                  </h2>
-                  <br />
-                  <small>BI 765</small>
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2 divi">SFO</h2>
-                  <br />
-                  <small>13:00</small>
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2">
-                    <i class="fas fa-plane-departure" />
-                    6H 20M
-                    <i class="fas fa-plane-arrival" />
-                  </h2>
-                  <br />
-                </li>
-                <li className="flight_details_list_item">
-                  <h2 className="flight_details_list_item_h2">DEL</h2>
-                  <br />
-                  <small>19:00</small>
-                </li>
-              </ul>
-            </li>
-          </ul>
-
-          <hr />
-        </div>
+        {Object.keys(this.state.final[key].key).map((keys, index) => (
+          <div className="flightDetails">
+            <ul className="flightDetails_list">
+              <li className="flightDetails_list_item">
+                <ul className="flight_details_list">
+                  <li className="flight_details_list_item">
+                    <img src={this.state.final[key].key[keys].carrierImage} alt="flight_logo" className="flight_logo" />
+                  </li>
+                  <li className="flight_details_list_item">
+                    <h2 className="flight_details_list_item_h2">
+                      {this.state.final[key].key[keys].carrier.Name}
+                    </h2>
+                    <br />
+                    <small>{this.state.final[key].key[keys].carrier.Code} {this.state.final[key].key[keys].flightNumber}</small>
+                  </li>
+                  <li className="flight_details_list_item">
+                    <h2 className="flight_details_list_item_h2 divi">{this.state.final[key].key[keys].originStation.Code}</h2>
+                    <br />
+                    <small>{this.state.final[key].key[keys].departureTime}</small>
+                  </li>
+                  <li className="flight_details_list_item">
+                    <h2 className="flight_details_list_item_h2">
+                      <i class="fas fa-plane-departure" />
+                      6H 20M
+                      <i class="fas fa-plane-arrival" />
+                    </h2>
+                    <br />
+                  </li>
+                  <li className="flight_details_list_item">
+                    <h2 className="flight_details_list_item_h2">{this.state.final[key].key[keys].destinationStation.Code}</h2>
+                    <br />
+                    <small>{this.state.final[key].key[keys].arrivalTime}</small>
+                  </li>
+                </ul>
+              </li>
+              <hr className="break_hr" />
+            </ul>
+          </div>
+        ))}
       </div>
     ));
+
     return (
       <div className="flightlist">
         <div className="hotels_top flights_top">
@@ -470,10 +437,16 @@ class FlightList extends Component {
                   <small>Departure</small>
                   <br />
                   <br />
-                  <h2 className="flightlist_right_top_list_item_h2">
-                    New Delhi
-                  </h2>
-                  <small>DEL-sky</small>
+                  {Object.keys(this.state.final).length > 0 && (
+                    <h2 className="flightlist_right_top_list_item_h2">
+                      {this.state.final[0].flight[0].originStation.Name}
+                    </h2>
+                  )}
+                  {Object.keys(this.state.final).length > 0 && (
+                    <small>
+                      {this.state.final[0].flight[0].originStation.Code}
+                    </small>
+                  )}
                 </li>
                 <li className="flightlist_right_top_list_item">
                   <img src={plane} className="plane" />
@@ -482,37 +455,47 @@ class FlightList extends Component {
                   <small>Arrival</small>
                   <br />
                   <br />
-                  <h2 className="flightlist_right_top_list_item_h2">
-                    San Francisco
-                  </h2>
-                  <small>SFO-sky</small>
+                  {Object.keys(this.state.final).length > 0 && (
+                    <h2 className="flightlist_right_top_list_item_h2">
+                      {this.state.final[0].flight[0].destinationStation.Name}
+                    </h2>
+                  )}
+                  {Object.keys(this.state.final).length > 0 && (
+                    <small>
+                      {this.state.final[0].flight[0].destinationStation.Code}
+                    </small>
+                  )}
                 </li>
 
                 <li className="flightlist_right_top_list_item">
                   <small>Depart</small>
                   <br />
                   <br />
-
-                  <small>
-                    <i class="fas fa-calendar-alt" />
-                    2019-12-01
-                  </small>
+                  {Object.keys(this.state.final).length > 0 && (
+                    <small>
+                      <i class="fas fa-calendar-alt" />
+                      {this.state.final[0].flight[0].departureDate}
+                    </small>
+                  )}
                 </li>
                 <li className="flightlist_right_top_list_item">
                   <small>Arrive</small>
                   <br />
                   <br />
-                  <small>
-                    <i class="fas fa-calendar-alt" /> 2019-12-10
-                  </small>
+                  {Object.keys(this.state.final).length > 0 && (
+                    <small>
+                      <i class="fas fa-calendar-alt" />
+                      {this.state.final[0].flight[0].arrivalDate}
+                    </small>
+                  )}
                 </li>
               </ul>
             </div>
 
             {/*Here goes the loop for the flight itineraries*/}
 
-            {/*itemss*/}
-            {Object.keys(this.state.carrier).map((key, index) => (
+            {itemss}
+            {/* {Object.keys(this.state.carrier).map((key, index) => (
               <div className="flightToggle" key={index}>
                 <ul className="flightlist_right_list">
                   <li className="flightlist_right_list_item">
@@ -640,7 +623,7 @@ class FlightList extends Component {
                   <hr />
                 </div>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
